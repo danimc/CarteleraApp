@@ -8,34 +8,34 @@ import { PeliculasService } from 'src/app/services/peliculas.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-
-  public movies: Movie[] = [];  
+  public movies: Movie[] = [];
   public moviesSlideshow: Movie[] = [];
 
   @HostListener('window:scroll', ['$event'])
   onScroll() {
-   const pos = (document.documentElement.scrollTop || document.body.scrollTop) + 1300;
-   const max = (document.documentElement.scrollHeight || document.body.scrollHeight);
+    const pos =
+      (document.documentElement.scrollTop || document.body.scrollTop) + 1300;
+    const max =
+      document.documentElement.scrollHeight || document.body.scrollHeight;
 
-   if(pos > max) {
+    if (pos > max) {
+      if (this.peliculasService.cargando) {
+        return;
+      }
+
       console.log('llamar servicio');
-      this.peliculasService.getCartelera().subscribe(resp => {
-        this.movies.push(... resp.results);
-      })
-      
-   }
-
-    
+      this.peliculasService.getCartelera().subscribe((movies) => {
+        this.movies.push(...movies);
+      });
+    }
   }
-
 
   constructor(private peliculasService: PeliculasService) {}
 
   ngOnInit(): void {
-    this.peliculasService.getCartelera().subscribe((resp) => {
-     // console.log(resp);
-     this.movies = resp.results;
-     this.moviesSlideshow = resp.results;
+    this.peliculasService.getCartelera().subscribe((movies) => {
+      this.movies = movies;
+      this.moviesSlideshow = movies;
     });
   }
 }
