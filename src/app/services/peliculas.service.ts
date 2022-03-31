@@ -21,6 +21,10 @@ export class PeliculasService {
     };
   }
 
+  resetCartelera() {
+    this.cartelaraPage = 1;
+  }
+
   getCartelera(): Observable<Movie[]> {
     console.log('cargando API');
 
