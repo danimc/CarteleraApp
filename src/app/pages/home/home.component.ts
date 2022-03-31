@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
         return;
       }
 
-      console.log('llamar servicio');
       this.peliculasService.getCartelera().subscribe((movies) => {
         this.movies.push(...movies);
       });
