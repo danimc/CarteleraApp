@@ -3,6 +3,7 @@
     <img
       [src]="movie.poster_path | poster"
       class="img-fluid poster"
+      (click)="onMovieClick(movie)"
     />
 
     <div>
@@ -17,7 +18,7 @@
             [readonly]=false
             [totalstars]="10"
           ></star-rating>
-    
+     
         </div>
         <div class="col-2 text-white">
           {{ movie.vote_average | number: "1.1-2" }}
